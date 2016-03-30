@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>模块管理|<{$configcache['Title']}></title>
+<title>模块管理|<?php echo ($configcache['Title']); ?></title>
 <link rel="stylesheet" type="text/css" href="__CSS__/content.css"  />
 <link rel="stylesheet" type="text/css" href="__CSS__/public.css"  />
 <script type="text/javascript" src="__JS__/jquery.js"></script>
@@ -87,27 +87,23 @@ $(document).ready(function() {
             <th>操作用户</th>
             <th>操作</th>
         </tr>
-        <if condition="$co eq 0"><tr class="tr"><td class="tc" colspan="9">暂无数据，正在努力添加中....</td></tr></if>
+        <?php if($co == 0): ?><tr class="tr"><td class="tc" colspan="9">暂无数据，正在努力添加中....</td></tr><?php endif; ?>
         <!--顶级数据-->
-        <volist name="list" id="vo">
-        <tr class="tr <eq name="mod" value="1">tr2</eq>">
-            <td class="tc fixed_w"><{$vo.ID}></td>
-            <td class="tl"><span style="color:#f9f9f9"><{$vo.html}></span><img src="__IMAGE__<{$vo.ModuleImg}>" border="0" height="18" /><{$vo.ModuleName}></td>
-            <td class="tc"><{$vo.classname}></td>
-            <td><{$vo.ModuleUrl}></td>
-            <td><{$vo.Description}></td>
+        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="tr <?php if(($mod) == "1"): ?>tr2<?php endif; ?>">
+            <td class="tc fixed_w"><?php echo ($vo["ID"]); ?></td>
+            <td class="tl"><span style="color:#f9f9f9"><?php echo ($vo["html"]); ?></span><img src="__IMAGE__<?php echo ($vo["ModuleImg"]); ?>" border="0" height="18" /><?php echo ($vo["ModuleName"]); ?></td>
+            <td class="tc"><?php echo ($vo["classname"]); ?></td>
+            <td><?php echo ($vo["ModuleUrl"]); ?></td>
+            <td><?php echo ($vo["Description"]); ?></td>
             <td class="tc">
-            <if condition="$vo.Status eq 0">
-            <img src="__IMAGE__/yes.png" border="0" title="启用状态" />
-            <else />
-            <img src="__IMAGE__/no.png" border="0" title="禁用状态" />
-            </if>
+            <?php if($vo["Status"] == 0): ?><img src="__IMAGE__/yes.png" border="0" title="启用状态" />
+            <?php else: ?>
+            <img src="__IMAGE__/no.png" border="0" title="禁用状态" /><?php endif; ?>
             </td>
-            <td class="tc"><{$vo.Msort}></td>
-            <td class="tc"><{$vo.Username}></td>
-            <td class="tc fixed_w"><a href="<{$vo.ID}>" class="edit"><img src="__IMAGE__/edit.png" border="0" title="修改" /></a><a href="<{$vo.ID}>" class="del"><img src="__IMAGE__/delete.png" border="0" title="删除" /></a></td>
-        </tr>
-        </volist>
+            <td class="tc"><?php echo ($vo["Msort"]); ?></td>
+            <td class="tc"><?php echo ($vo["Username"]); ?></td>
+            <td class="tc fixed_w"><a href="<?php echo ($vo["ID"]); ?>" class="edit"><img src="__IMAGE__/edit.png" border="0" title="修改" /></a><a href="<?php echo ($vo["ID"]); ?>" class="del"><img src="__IMAGE__/delete.png" border="0" title="删除" /></a></td>
+        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     </table>
 </div>
 </body>

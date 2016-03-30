@@ -8,5 +8,7 @@ return array(
 	'DB_PORT' => '3306', //端口
 	'DB_PREFIX' => 'tp_', //表前缀
 	'DB_DSN' => 'mysql://root:111222@localhost:3306/oa', //使用DSN方式配置数据库信息
+	// DSN参数格式为：
+	// 数据库类型://用户名:密码@数据库地址:数据库端口/数据库名
 );
 ?>
