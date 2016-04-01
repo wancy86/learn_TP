@@ -1,3 +1,5 @@
 
 Home/Runtime/Cache/*
+Home/Runtime/Temp/*
+Home/Runtime/Cache/*
 Home/Runtime/Logs/*
